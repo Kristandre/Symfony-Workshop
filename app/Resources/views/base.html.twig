@@ -4,22 +4,46 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Symfony Workshop{% endblock %}</title>
 
+
+        <!-- DONT TOUCH -->
+            <!-- Compressed CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+
+            <!-- Compressed JavaScript -->
+            <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+        <!-- END DONT TOUCH -->
+
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         {% endblock %}
     </head>
     <body>
-        {% block header %}
-            <h1>This is the header</h1>
-        {% endblock %}
+        <div class="row header-container fullwidth">
+            <div class="small-8 small-offset-2 end columns">
+                {% block header %}
+                    <h1>This is the header</h1>
+                {% endblock %}
+            </div>
+        </div>
 
-        {% block body %}
-            <p>This is the body</p>
-        {% endblock %}
+        <div class="row fullwidth">
+            <div class="small-8 small-offset-2 end columns ">
+                {% block body %}
+                    <p>This is the body</p>
+                {% endblock %}
+            </div>
+        </div>
 
-        {% block footer %}
-            <p>This is the footer</p>
-        {% endblock %}
+
+        <div class="row footer-container fullwidth">
+            <div class="small-8 small-offset-2 end columns">
+                {% block footer %}
+                    <p>This is the footer</p>
+                {% endblock %}
+            </div>
+        </div>
+
 
         {% block javascripts %}
             <script src="{{ asset('js/app.js') }}"></script>

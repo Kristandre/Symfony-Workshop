@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block header %}
+    <h1>{{ post.title }}</h1>
+{% endblock %}
+
+{% block body %}
+    <p>{{ post.text }}</p>
+{% endblock %}
+
+{% block footer %}
+    <p>Jeg er fremdeles en footer</p>
+{% endblock %}
