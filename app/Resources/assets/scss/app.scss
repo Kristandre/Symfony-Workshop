@@ -6,6 +6,49 @@
   max-width: initial;
 }
 
+$border-color: #333333;
+$weather-color: #bb302e;
+
+.weather{
+  margin:10px;
+  padding:15px;
+  border:1px solid $border-color;
+
+  //.weather:hover
+  &:hover{
+    border-color: $weather-color;
+  }
+
+  //.weather h5
+  h5{
+    color: $weather-color;
+  }
+
+  //.weather h6
+  h6{
+
+    //.weather h6:first-of-type
+    &:first-of-type{
+      font-weight: bold;
+    }
+
+    //.weather h6:hover
+    &:hover{
+
+      //.weather h6:hover:nth-of-type(2), .weather h6:hover:nth-of-type(3)
+      &:nth-of-type(2), &:nth-of-type(3){
+        color: $weather-color;
+        cursor:pointer;
+      }
+    }
+  }
+
+}
+.weather-footer{
+  color:$weather-color;
+  text-shadow: 1px 1px #000000;
+}
+
 // --- END DONT TOUCH --- //
 
 .header-container, .footer-container{

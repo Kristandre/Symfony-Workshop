@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <h2 class="text-center">Værmelding</h2>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="text-center">Trondheim</h1>
+        {% for weatherData in weatherDataList %}{#Loops over all weather data#}
+            <div class="small-12 medium-6 large-3 columns {{ loop.last == weatherDataList|length ? 'end':'' }}{#Add the 'end' class if this is the last column#}">
+                <div class="weather">
+                    <h5>{{ 'now'|date('Y-m-d') == weatherData.time|date('Y-m-d') ? 'Today' : weatherData.time|date('l') }}</h5>{#Print 'Today' if weatherData.time == now, else print the name of the day#}
+                    <h6>{{ weatherData.time|date('H:s') }}</h6>{#Display the time in hh:ss format#}
+                    <h6>Temperature: {{ weatherData.temperatureInCelsius|round }} &deg;C</h6>{#Apply the round filter on temperature to remove decimals#}
+                    <h6>{{ weatherData.weatherType|capitalize }}</h6>{#Apply the capitalize filter to capitalize the first letter#}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <p class="text-center weather-footer">Copyright &COPY; Vektorvær {{ 'now'|date('Y') }}</p>{#Print the current year#}
+{% endblock %}

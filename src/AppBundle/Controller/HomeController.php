@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Weather;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -145,10 +146,37 @@ Anyways, vi snakkes litt senere folkens.",
         foreach($this->posts as $post){
             if($post['id'] == $id){
                 $myPost = $post;
+                break;
             }
         }
         return $this->render('home/post.html.twig', array(
             'post' => $myPost,
+        ));
+    }
+
+    /**
+     * @Route("demo", name="weather_show")
+     */
+    public function showWeatherAction(){
+        //Longitude and latitude for Trondheim
+        $lat = 63.446827;
+        $lon = 10.421906;
+
+        $json = file_get_contents("http://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=ae6126f2d1091c32197e3ebc253dbe76");
+        $obj = json_decode($json);
+        $weatherDataList = array();
+        $city = $obj->city->name;
+        foreach($obj->list as $weatherData){
+            $weather = new Weather();
+            $weather->setTemperature($weatherData->main->temp);
+            $weather->setWeatherType($weatherData->weather[0]->description);
+            $weather->setTime(new \DateTime($weatherData->dt_txt));
+            $weather->setCity($city);
+            $weatherDataList[] = $weather;
+        }
+
+        return $this->render('demo/demo.html.twig', array(
+            'weatherDataList' => $weatherDataList,
         ));
     }
 }
